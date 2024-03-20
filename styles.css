@@ -1,83 +1,136 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-    v2.0 | 20110126
-    License: none (public domain)
-*/
+/* Andy Bell's more modern css reset: */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-/* 
-
-Background color: #E7F1F1
-Font: Poppins
-Icons: Found here (Note: Add these icons to an assets folder in your repository.) */
-
-* {
+/* Box sizing rules */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
+/* Prevent font size inflation */
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+/* Set core body defaults */
 body {
+    min-height: 100vh;
+    line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+    min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+    scroll-margin-block: 5ex;
+}
+
+/* end andy bell's reset*/
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
     font-family: "Poppins", sans-serif;
     text-align: center;
     background-color: #E7F1F1;
 }
 
 header {
-    padding: 7rem 0 6rem;
+    padding: 3.5rem 0 6rem;
 }
 
 h1 {
     font-size: 5rem;
-
     text-transform: uppercase;
     font-weight: 900;
 }
 
 main {
+    flex-grow: 1;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
+}
+
+@media screen and (min-width: 720px) {
+    ul {
+        flex-direction: row;
+    }
 }
 
 .box {
@@ -86,27 +139,36 @@ main {
     border: 4px solid black;
 }
 
-section:nth-child(1) > .box {
+li:nth-child(1)>.box {
     background-color: #EA9999;
 }
 
-section:nth-child(2) > .box {
+li:nth-child(2)>.box {
     background-color: #FACB9C;
 }
 
-section:nth-child(3) > .box {
+li:nth-child(3)>.box {
     background-color: #FFE59A;
 }
 
-section:nth-child(4) > .box {
+li:nth-child(4)>.box {
     background-color: #B6D7A8;
 }
 
-section:nth-child(5) > .box {
+li:nth-child(5)>.box {
     background-color: #A4C4CA;
 }
 
 p {
     font-size: 1.5rem;
-    margin-top: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+footer {
+    margin: 0 auto;
+    padding: 0.8rem;
+}
+
+small {
+    font-size: 0.875rem;
 }
