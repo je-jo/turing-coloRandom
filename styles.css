@@ -119,6 +119,7 @@ main {
 ul {
     list-style: none;
     margin: 0;
+    margin-bottom: 6.5rem;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -139,29 +140,19 @@ ul {
     border: 4px solid black;
 }
 
-li:nth-child(1)>.box {
-    background-color: #EA9999;
-}
-
-li:nth-child(2)>.box {
-    background-color: #FACB9C;
-}
-
-li:nth-child(3)>.box {
-    background-color: #FFE59A;
-}
-
-li:nth-child(4)>.box {
-    background-color: #B6D7A8;
-}
-
-li:nth-child(5)>.box {
-    background-color: #A4C4CA;
-}
-
 p {
     font-size: 1.5rem;
     margin-top: 0.5rem;
+}
+
+.btn {
+    font-size: 1.875rem;
+    font-weight: 300;
+    padding: 0.35rem 3.25rem;
+    background-color: black;
+    color: white;
+    border: 0;
+    border-radius: 0 3.25rem 0 3.25rem;
 }
 
 footer {
