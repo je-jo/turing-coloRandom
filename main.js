@@ -1,15 +1,38 @@
 // variables
 
 var hexCharacters = "ABCDEF0123456789";
-var currentPalette = [];
+var currentPalette = [
+    {
+        color: null,
+        isLocked: false
+    },
+    {
+        color: null,
+        isLocked: false
+    },
+    {
+        color: null,
+        isLocked: false
+    },
+    {
+        color: null,
+        isLocked: false
+    },
+    {
+        color: null,
+        isLocked: false
+    }
+];
 
 var boxes = document.querySelectorAll(".box");
 var btnNew = document.querySelector(".btn-new");
+var containerCurrentPalette = document.querySelector(".palette-current");
+
 
 // helper functions
 
 function getRandomChar(string) {
-    var randomIndex =  Math.floor(Math.random() * string.length);
+    var randomIndex = Math.floor(Math.random() * string.length);
     return string.charAt(randomIndex);
 }
 
@@ -24,30 +47,50 @@ function generateRandomHexCode() {
 // main functions
 
 function generateRandomPalette() {
-    currentPalette = [];
-    for (var i = 0; i < 5; i++) {
-        currentPalette.push(generateRandomHexCode());
+    for (var i = 0; i < currentPalette.length; i++) {
+        if (!currentPalette[i].isLocked) {
+            currentPalette[i].color = generateRandomHexCode();
+        }
     }
     return currentPalette;
+}
+
+function toggleLock(e) {
+    if (e.target.type === "button") {
+        var indexToChange = [...containerCurrentPalette.children].indexOf(e.target.parentNode);
+        currentPalette[indexToChange].isLocked = !currentPalette[indexToChange].isLocked;
+        renderCurrentLockStatus(indexToChange);
+    }
 }
 
 // Update DOM functions
 
 function renderCurrentPallete() {
     for (var i = 0; i < boxes.length; i++) {
-        boxes[i].style.backgroundColor = currentPalette[i];
-        boxes[i].nextElementSibling.textContent = currentPalette[i];
+        boxes[i].style.backgroundColor = currentPalette[i].color;
+        boxes[i].children[1].textContent = currentPalette[i].color;
     }
+}
+
+function renderCurrentLockStatus(index) {
+    if (currentPalette[index].isLocked) {
+        boxes[index].children[0].style.backgroundImage = 'url("/assets/locked.png")';
+    } else {
+        boxes[index].children[0].style.backgroundImage = 'url("/assets/unlocked.png")';
+    }
+
 }
 
 // Event listeners
 
-btnNew.addEventListener("click", function() {
+containerCurrentPalette.addEventListener("click", toggleLock);
+
+btnNew.addEventListener("click", function () {
     generateRandomPalette();
     renderCurrentPallete();
 });
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     generateRandomPalette();
     renderCurrentPallete();
 });
