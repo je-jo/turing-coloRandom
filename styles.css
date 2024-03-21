@@ -128,11 +128,14 @@ footer {
     padding: 0.8rem;
 }
 
-ul.palette-current {
+ul {
     list-style: none;
     margin: 0;
-    margin-bottom: 6.5rem;
     padding: 0;
+}
+
+ul.palette-current {
+    margin-bottom: 6.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,6 +146,30 @@ ul.palette-current {
     width: 150px;
     height: 150px;
     border: 4px solid black;
+}
+
+ul.saved-palette {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0 1.5rem;
+    gap: 5px;
+}
+
+.mini-box {
+    width: 55px;
+    height: 55px;
+    border: 5px solid black;
+}
+
+.btn {
+    margin: 3.5rem 2.5rem;
+    font-size: 1.875rem;
+    font-weight: 300;
+    padding: 0.35rem 3.25rem;
+    background-color: black;
+    color: white;
+    border: 0;
+    border-radius: 0 3.25rem 0 3.25rem;
 }
 
 .btn-color {
@@ -176,16 +203,7 @@ p {
     margin-top: 0.5rem;
 }
 
-.btn {
-    margin: 3.5rem 2.5rem;
-    font-size: 1.875rem;
-    font-weight: 300;
-    padding: 0.35rem 3.25rem;
-    background-color: black;
-    color: white;
-    border: 0;
-    border-radius: 0 3.25rem 0 3.25rem;
-}
+
 
 
 
