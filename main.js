@@ -74,9 +74,9 @@ function renderCurrentPallete() {
 
 function renderCurrentLockStatus(index) {
     if (currentPalette[index].isLocked) {
-        boxes[index].children[0].style.backgroundImage = 'url("/assets/locked.png")';
+        boxes[index].children[0].style.backgroundImage = 'url("assets/locked.png")';
     } else {
-        boxes[index].children[0].style.backgroundImage = 'url("/assets/unlocked.png")';
+        boxes[index].children[0].style.backgroundImage = 'url("assets/unlocked.png")';
     }
 
 }
