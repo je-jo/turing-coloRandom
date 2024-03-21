@@ -23,10 +23,13 @@ var currentPalette = [
         isLocked: false
     }
 ];
+var savedPalettes = [];
 
 var boxes = document.querySelectorAll(".box");
 var btnNew = document.querySelector(".btn-new");
+var btnSave = document.querySelector(".btn-save");
 var containerCurrentPalette = document.querySelector(".palette-current");
+var listSavedPalettes = document.querySelector(".list-saved");
 
 
 // helper functions
@@ -51,7 +54,7 @@ function generateRandomPalette() {
         if (!currentPalette[i].isLocked) {
             currentPalette[i].color = generateRandomHexCode();
         }
-    }
+    };
     return currentPalette;
 }
 
@@ -63,12 +66,40 @@ function toggleLock(e) {
     }
 }
 
+function savePalette() {
+    var paletteToSave = [];
+    for (var i = 0; i < currentPalette.length; i++) {
+        paletteToSave.push({color: currentPalette[i].color});
+    }
+    savedPalettes.push(paletteToSave);
+    renderSavedPalettes();
+    generateRandomPalette();
+    renderCurrentPalette();
+};
+
 // Update DOM functions
 
-function renderCurrentPallete() {
+function renderCurrentPalette() {
     for (var i = 0; i < boxes.length; i++) {
         boxes[i].style.backgroundColor = currentPalette[i].color;
         boxes[i].children[1].textContent = currentPalette[i].color;
+    }
+}
+
+function renderSavedPalettes() {
+    listSavedPalettes.textContent = "";
+    for (var i = 0; i < savedPalettes.length; i++) {
+        var savedPaletteListItem = document.createElement("li");
+        var savedPalette = document.createElement("ul");
+        savedPalette.classList.add("saved-palette");
+        for (var j = 0; j < savedPalettes[i].length; j++) {
+            var savedPaletteColor = document.createElement("li");
+            savedPaletteColor.classList.add("mini-box");
+            savedPaletteColor.style.backgroundColor = savedPalettes[i][j].color
+            savedPalette.appendChild(savedPaletteColor);
+        }
+        savedPaletteListItem.appendChild(savedPalette);
+        listSavedPalettes.appendChild(savedPaletteListItem);
     }
 }
 
@@ -78,7 +109,6 @@ function renderCurrentLockStatus(index) {
     } else {
         boxes[index].children[0].style.backgroundImage = 'url("assets/unlocked.png")';
     }
-
 }
 
 // Event listeners
@@ -87,12 +117,14 @@ containerCurrentPalette.addEventListener("click", toggleLock);
 
 btnNew.addEventListener("click", function () {
     generateRandomPalette();
-    renderCurrentPallete();
+    renderCurrentPalette();
 });
+
+btnSave.addEventListener("click", savePalette)
 
 window.addEventListener("load", function () {
     generateRandomPalette();
-    renderCurrentPallete();
+    renderCurrentPalette();
 });
 
 
