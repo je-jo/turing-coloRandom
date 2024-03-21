@@ -29,7 +29,8 @@ var boxes = document.querySelectorAll(".box");
 var btnNew = document.querySelector(".btn-new");
 var btnSave = document.querySelector(".btn-save");
 var containerCurrentPalette = document.querySelector(".palette-current");
-var listSavedPalettes = document.querySelector(".list-saved");
+var containerSavedPalettes = document.querySelector(".container-saved-palettes");
+var paraSavedPalettes = document.querySelector(".para-saved-palettes")
 
 
 // helper functions
@@ -69,7 +70,7 @@ function toggleLock(e) {
 function savePalette() {
     var paletteToSave = [];
     for (var i = 0; i < currentPalette.length; i++) {
-        paletteToSave.push({color: currentPalette[i].color});
+        paletteToSave.push({ color: currentPalette[i].color });
     }
     savedPalettes.push(paletteToSave);
     renderSavedPalettes();
@@ -87,20 +88,25 @@ function renderCurrentPalette() {
 }
 
 function renderSavedPalettes() {
-    listSavedPalettes.textContent = "";
-    for (var i = 0; i < savedPalettes.length; i++) {
-        var savedPaletteListItem = document.createElement("li");
-        var savedPalette = document.createElement("ul");
-        savedPalette.classList.add("saved-palette");
-        for (var j = 0; j < savedPalettes[i].length; j++) {
-            var savedPaletteColor = document.createElement("li");
-            savedPaletteColor.classList.add("mini-box");
-            savedPaletteColor.style.backgroundColor = savedPalettes[i][j].color
-            savedPalette.appendChild(savedPaletteColor);
+    if (!savedPalettes.length) {
+        paraSavedPalettes.classList.remove("hidden");
+    } else {
+        paraSavedPalettes.classList.add("hidden");
+        containerSavedPalettes.textContent = "";
+        for (var i = 0; i < savedPalettes.length; i++) {
+            var savedPaletteListItem = document.createElement("li");
+            var savedPalette = document.createElement("ul");
+            savedPalette.classList.add("saved-palette");
+            for (var j = 0; j < savedPalettes[i].length; j++) {
+                var savedPaletteColor = document.createElement("li");
+                savedPaletteColor.classList.add("mini-box");
+                savedPaletteColor.style.backgroundColor = savedPalettes[i][j].color;
+                savedPalette.appendChild(savedPaletteColor);
+            }
+            savedPaletteListItem.appendChild(savedPalette);
+            containerSavedPalettes.appendChild(savedPaletteListItem);
         }
-        savedPaletteListItem.appendChild(savedPalette);
-        listSavedPalettes.appendChild(savedPaletteListItem);
-    }
+    }  
 }
 
 function renderCurrentLockStatus(index) {
@@ -120,7 +126,7 @@ btnNew.addEventListener("click", function () {
     renderCurrentPalette();
 });
 
-btnSave.addEventListener("click", savePalette)
+btnSave.addEventListener("click", savePalette);
 
 window.addEventListener("load", function () {
     generateRandomPalette();

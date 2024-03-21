@@ -23,7 +23,7 @@ Write HTML and CSS, and leverage JavaScript to both create your data model and i
 - [x] Basic Layout with hardcoded colors
 - [x] Generating random palettes
 - [x] Locking + Unlocking Colors
-- [ ] Saving Palettes
+- [x] Saving Palettes
 - [ ] Deleting Saved Palettes
 - [ ] Editing Saved Palettes (Extension)
 
