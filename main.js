@@ -103,6 +103,11 @@ function renderSavedPalettes() {
                 savedPaletteColor.style.backgroundColor = savedPalettes[i][j].color;
                 savedPalette.appendChild(savedPaletteColor);
             }
+            var savedPaletteBtnLi = document.createElement("li")
+            var btnDelete = document.createElement("button");
+            btnDelete.classList.add("btn-delete");
+            savedPaletteBtnLi.appendChild(btnDelete);
+            savedPalette.appendChild(savedPaletteBtnLi);
             savedPaletteListItem.appendChild(savedPalette);
             containerSavedPalettes.appendChild(savedPaletteListItem);
         }
