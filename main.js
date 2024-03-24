@@ -30,7 +30,7 @@ var btnNew = document.querySelector(".btn-new");
 var btnSave = document.querySelector(".btn-save");
 var containerCurrentPalette = document.querySelector(".palette-current");
 var containerSavedPalettes = document.querySelector(".container-saved-palettes");
-var paraSavedPalettes = document.querySelector(".para-saved-palettes")
+var paraSavedPalettes = document.querySelector(".para-saved-palettes");
 
 
 // helper functions
@@ -103,10 +103,15 @@ function renderSavedPalettes() {
                 savedPaletteColor.style.backgroundColor = savedPalettes[i][j].color;
                 savedPalette.appendChild(savedPaletteColor);
             }
+            var savedPaletteBtnLi = document.createElement("li")
+            var btnDelete = document.createElement("button");
+            btnDelete.classList.add("btn-delete");
+            savedPaletteBtnLi.appendChild(btnDelete);
+            savedPalette.appendChild(savedPaletteBtnLi);
             savedPaletteListItem.appendChild(savedPalette);
             containerSavedPalettes.appendChild(savedPaletteListItem);
         }
-    }  
+    }
 }
 
 function renderCurrentLockStatus(index) {
@@ -115,6 +120,20 @@ function renderCurrentLockStatus(index) {
     } else {
         boxes[index].children[0].style.backgroundImage = 'url("assets/unlocked.png")';
     }
+}
+
+function getIndexToRemove(e) {
+    if (e.target.classList.contains("btn-delete")) {
+        var nodeToRemove = e.target.parentNode.parentNode.parentNode
+        var indexToRemove = [...containerSavedPalettes.children].indexOf(nodeToRemove)
+        savedPalettes.splice(indexToRemove, 1);
+        removePalette(nodeToRemove);
+    }
+}
+
+function removePalette(node) {
+    containerSavedPalettes.removeChild(node);
+    renderSavedPalettes();
 }
 
 // Event listeners
@@ -127,6 +146,8 @@ btnNew.addEventListener("click", function () {
 });
 
 btnSave.addEventListener("click", savePalette);
+
+containerSavedPalettes.addEventListener("click", getIndexToRemove);
 
 window.addEventListener("load", function () {
     generateRandomPalette();
